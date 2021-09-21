@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black;">
+    <h1 style="color: white;">AI</h1>
+    <h2 style="color: white;">Alpha-Beta pruning using JavaScript</h2>
+    <h3 style="color: white;">Code:</h3>
+    <p style="color: green;">let depth, nodeIndex, maximizingPlayer, alpha, beta;<br>
+
+        const min = -1000, max = 1000;<br>
+        
+        function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta){<br>
+        
+            if (depth == 3) {<br>
+                return values[nodeIndex];<br>
+            } <br>
+        
+            if(maximizingPlayer){<br>
+        
+                let best = min;<br>
+                
+                for (let i = 0; i < 2; i++) {<br>
+                    
+                    let val = minimax(depth + 1, nodeIndex * 2 + i, false, values, alpha, beta);<br>
+                    best = Math.max(best, val);<br>
+                    alpha = Math.max(alpha, best);<br>
+        
+                    if(beta <= alpha){ <br>
+                        break <br>
+                    }<br>
+                    
+                }<br>
+                return best;<br>
+            }<br>
+            else{<br>
+                let best = max;<br>
+                
+                for (let i = 0; i < 2; i++) {<br>
+                    
+                    val = minimax(depth + 1, nodeIndex * 2 + i, true, values, alpha, beta);<br>
+                    best = Math.min(best, val);<br>
+                    beta = Math.min(beta, best);<br>
+        
+                    if(beta <= alpha){<br>
+                        break<br>
+                    }<br>
+                    
+                }<br>
+                return best;<br>
+            }<br>
+        }<br>
+        
+        var values = [3, 5, 6, 9, 1, 2, 0, -1]<br>
+        console.log("The optimal value is: " + minimax(0, 0, true, values, min, max))</p> <br>
+        <h3 style="color: white;">Output</h3>
+        <p style="color: green;" id="output"></p> <br>
+    <a style="text-decoration: none; color: aquamarine; font-size: 17px; padding-bottom: 50px;" href="https://pythontutor.com/visualize.html#code=let%20depth,%20nodeIndex,%20maximizingPlayer,%20alpha,%20beta%3B%0A%0Aconst%20min%20%3D%20-1000,%20max%20%3D%201000%3B%0A%0Afunction%20minimax%28depth,%20nodeIndex,%20maximizingPlayer,%20values,%20alpha,%20beta%29%7B%0A%0A%20%20%20%20if%20%28depth%20%3D%3D%203%29%20%7B%0A%20%20%20%20%20%20%20%20return%20values%5BnodeIndex%5D%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20if%28maximizingPlayer%29%7B%0A%0A%20%20%20%20%20%20%20%20let%20best%20%3D%20min%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20for%20%28let%20i%20%3D%200%3B%20i%20%3C%202%3B%20i%2B%2B%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20val%20%3D%20minimax%28depth%20%2B%201,%20nodeIndex%20*%202%20%2B%20i,%20false,%20values,%20alpha,%20beta%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20best%20%3D%20Math.max%28best,%20val%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20alpha%20%3D%20Math.max%28alpha,%20best%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%28beta%20%3C%3D%20alpha%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20return%20best%3B%0A%20%20%20%20%7D%0A%20%20%20%20else%7B%0A%20%20%20%20%20%20%20%20let%20best%20%3D%20max%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20for%20%28let%20i%20%3D%200%3B%20i%20%3C%202%3B%20i%2B%2B%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20val%20%3D%20minimax%28depth%20%2B%201,%20nodeIndex%20*%202%20%2B%20i,%20true,%20values,%20alpha,%20beta%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20best%20%3D%20Math.min%28best,%20val%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20beta%20%3D%20Math.min%28beta,%20best%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%28beta%20%3C%3D%20alpha%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20return%20best%3B%0A%20%20%20%20%7D%0A%7D%0A%0Avar%20values%20%3D%20%5B3,%205,%206,%209,%201,%202,%200,%20-1%5D%0Aconsole.log%28%22The%20optimal%20value%20is%3A%22,%20minimax%280,%200,%20true,%20values,%20min,%20max%29%29&cumulative=false&curInstr=120&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D&textReferences=false" target="_blank">Click here to visualize the code</a>
+    <script src="alpha-beta.js"></script>
+</body>
+</html>
